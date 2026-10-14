@@ -42,7 +42,7 @@
             overflow-x: hidden;
         }
 
-        /* พื้นหลังเมฆและสตรอว์เบอร์รีฟุ้งๆ */
+        /* พื้นหลังเมฆและสตรอว์เบอร์รี (ปรับให้ชัดขึ้น ไม่เบลอมาก) */
         .floating-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -52,20 +52,20 @@
             overflow: hidden;
         }
         
-        /* กระจกฝ้าฟุ้งๆ บังเลเยอร์หลังสุด */
+        /* กระจกฝ้าแบบบางเบา (ให้พื้นหลังยังคงสดใสชัดเจน) */
         .frosted-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            backdrop-filter: blur(8px);
-            background: rgba(255, 245, 247, 0.4);
+            backdrop-filter: blur(2px);
+            background: rgba(255, 245, 247, 0.15);
             pointer-events: none;
             z-index: -1;
         }
 
         .float-item {
             position: absolute;
-            opacity: 0.25; 
-            filter: drop-shadow(0 8px 10px rgba(253, 195, 209, 0.4));
+            opacity: 0.65; 
+            filter: drop-shadow(0 8px 10px rgba(253, 195, 209, 0.5));
             animation: floatVibe ease-in-out infinite;
             user-select: none;
         }
@@ -85,6 +85,41 @@
             33% { transform: translate(15px, -20px) rotate(10deg) scale(1.05); }
             66% { transform: translate(-10px, 15px) rotate(-5deg) scale(0.95); }
             100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+        }
+
+        /* 🔴 วงกลมเด้งดึ๋งไปมาชนขอบ 4 ลูก 🔴 */
+        .bouncing-ball {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.45;
+            filter: blur(1px);
+        }
+        .ball-1 { width: 90px; height: 90px; background: #FF5C89; animation: bounce1 14s infinite alternate ease-in-out; }
+        .ball-2 { width: 120px; height: 120px; background: #FDA8BF; animation: bounce2 18s infinite alternate ease-in-out; }
+        .ball-3 { width: 70px; height: 70px; background: #FB8CAC; animation: bounce3 12s infinite alternate ease-in-out; }
+        .ball-4 { width: 100px; height: 100px; background: #FFDBDB; animation: bounce4 16s infinite alternate ease-in-out; }
+
+        @keyframes bounce1 {
+            0% { top: 10%; left: 5%; }
+            50% { top: 75% ; left: 80%; }
+            100% { top: 40%; left: 90%; }
+        }
+        @keyframes bounce2 {
+            0% { top: 60%; left: 80%; }
+            50% { top: 15%; left: 20%; }
+            100% { top: 80%; left: 10%; }
+        }
+        @keyframes bounce3 {
+            0% { top: 30%; left: 40%; }
+            50% { top: 80%; left: 60%; }
+            100% { top: 5%; left: 50%; }
+        }
+        @keyframes bounce4 {
+            0% { top: 80%; left: 30%; }
+            50% { top: 20%; left: 70%; }
+            100% { top: 60%; left: 20%; }
         }
 
         .cloud {
@@ -117,20 +152,21 @@
                  2px  0px 0 #fff;
         }
 
-        /* 🎀 KAWAII BORDER PANEL CSS 🎀 */
+        /* 🎀 KAWAII BORDER PANEL CSS (Responsive Adapt) 🎀 */
         .kawaii-panel {
             position: relative;
             background-color: rgba(255, 255, 255, 0.95); 
             backdrop-filter: blur(12px);
             border-radius: 36px;
-            border: 12px solid #FFDBDB; /* ขอบสีชมพูหนา */
+            border: 12px solid #FFDBDB;
             padding: 28px 24px;
             box-shadow: 0 10px 30px rgba(253, 195, 209, 0.5);
             margin-top: 1.5rem;
             margin-bottom: 1.5rem;
             z-index: 10;
+            width: 100%;
+            box-sizing: border-box;
         }
-        /* เส้นประรอยเย็บด้านใน */
         .kawaii-panel::after {
             content: "";
             position: absolute;
@@ -140,18 +176,32 @@
             pointer-events: none;
             z-index: 0;
         }
-        /* ไอคอนตกแต่งตามมุม */
         .k-bow {
-            position: absolute; top: -35px; left: -30px; font-size: 4.5rem; z-index: 20; 
+            position: absolute; top: -35px; left: -30px; font-size: 4rem; z-index: 20; 
             transform: rotate(-15deg); filter: drop-shadow(2px 4px 4px rgba(253,195,209,0.8)); pointer-events: none; user-select: none;
         }
         .k-heart {
-            position: absolute; top: -25px; right: -25px; font-size: 3.5rem; z-index: 20; 
+            position: absolute; top: -25px; right: -25px; font-size: 3rem; z-index: 20; 
             transform: rotate(15deg); filter: drop-shadow(2px 4px 4px rgba(253,195,209,0.8)); pointer-events: none; user-select: none;
         }
         .k-star {
-            position: absolute; bottom: -25px; left: -25px; font-size: 3.5rem; z-index: 20; 
+            position: absolute; bottom: -25px; left: -25px; font-size: 3rem; z-index: 20; 
             transform: rotate(-10deg); filter: drop-shadow(2px 4px 4px rgba(253,195,209,0.8)); pointer-events: none; user-select: none;
+        }
+
+        /* Responsive Container */
+        .max-w-container {
+            width: 100%;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        @media (min-width: 768px) {
+            .max-w-container {
+                max-w: 680px;
+            }
         }
 
         button, .interactive-btn {
@@ -242,9 +292,14 @@
         <div class="float-item f-7">🎀</div>
         <div class="float-item f-8">🍓</div>
         <div class="float-item f-9">🍰</div>
+
+        <!-- ลูกบอลเด้งดึ๋ง 4 ลูก -->
+        <div class="bouncing-ball ball-1"></div>
+        <div class="bouncing-ball ball-2"></div>
+        <div class="bouncing-ball ball-3"></div>
+        <div class="bouncing-ball ball-4"></div>
     </div>
     
-    <!-- ฟิลเตอร์เบลอทับพื้นหลัง -->
     <div class="frosted-overlay"></div>
 
     <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
@@ -279,7 +334,7 @@
         </div>
     </nav>
 
-    <main id="view-customer" class="max-w-md mx-auto p-4 space-y-6 pt-6 relative z-10">
+    <main id="view-customer" class="max-w-container p-4 space-y-6 pt-6 relative z-10">
         
         <div class="text-center space-y-2 fade-in">
             <div class="relative w-64 h-52 mx-auto flex items-center justify-center mt-2 mb-4">
@@ -330,7 +385,6 @@
             
             <h2 class="text-2xl sm:text-3xl font-bold text-arcavia mt-2 text-outline-white drop-shadow-md tracking-wide">˚₊‧꒰ა Chaba Shortcake ໒꒱ ‧₊˚</h2>
             
-            <!-- แคปซูลคำโปรยร้าน -->
             <div class="inline-block bg-white/70 backdrop-blur-md rounded-full px-5 py-1.5 border border-white/50 shadow-sm mt-2">
                 <p id="display-shop-tagline" class="text-sm text-arcavia font-bold tracking-wide">ยินดีต้อนรับเบ้บทุกคนนะค้าา</p>
             </div>
@@ -347,9 +401,7 @@
 
         <div id="customer-tab-queue" class="space-y-6 mt-4">
             
-            <!-- KAWAII PANEL: บอร์ดคิวรวม -->
             <div class="kawaii-panel text-center relative overflow-hidden group hover:shadow-lg transition-all duration-300 fade-in">
-                <!-- ของตกแต่ง Kawaii Border -->
                 <div class="k-bow">🎀</div><div class="k-heart">🩷</div><div class="k-star">⭐</div>
                 
                 <div class="relative z-10">
@@ -371,7 +423,6 @@
                 </div>
             </div>
 
-            <!-- KAWAII PANEL: ฟอร์มเช็กคิว -->
             <div class="kawaii-panel text-center fade-in" style="animation-delay: 0.1s;">
                 <div class="k-bow">🎀</div><div class="k-heart">🩷</div><div class="k-star">⭐</div>
                 
@@ -395,7 +446,6 @@
                 </div>
             </div>
 
-            <!-- กล่องผลลัพธ์เช็กคิว (โผล่มาตอนกดเช็ก) -->
             <div id="queue-result-box" class="mt-6 bg-white rounded-3xl p-5 border-4 border-blush shadow-cute text-left hidden fade-in relative overflow-hidden">
                 <h4 class="font-bold text-xl text-arcavia border-b-2 border-blush pb-3 mb-2 flex items-center gap-2 relative z-10" id="res-queue-num">
                      คิวของเบ้บ
@@ -446,7 +496,6 @@
 
         <div id="customer-tab-review" class="space-y-6 mt-4 hidden">
             
-            <!-- KAWAII PANEL: เครดิต & Plus One -->
             <div class="kawaii-panel text-center fade-in" style="animation-delay: 0.1s;">
                 <div class="k-bow">🎀</div><div class="k-heart">🩷</div><div class="k-star">⭐</div>
                 
@@ -474,7 +523,6 @@
                 </div>
             </div>
 
-            <!-- KAWAII PANEL: รีวิวลูกค้า -->
             <div class="kawaii-panel fade-in" style="animation-delay: 0.2s;">
                 <div class="k-bow">🎀</div><div class="k-heart">🩷</div><div class="k-star">⭐</div>
                 
@@ -528,8 +576,7 @@
 
     </main>
 
-    <main id="view-login" class="max-w-sm mx-auto p-4 pt-20 hidden relative z-10 fade-in text-center">
-        <!-- KAWAII PANEL: เข้าสู่ระบบ -->
+    <main id="view-login" class="max-w-container p-4 pt-20 hidden relative z-10 fade-in text-center">
         <div class="kawaii-panel text-center relative overflow-hidden">
             <div class="k-bow">🎀</div><div class="k-heart">🩷</div><div class="k-star">⭐</div>
             <div class="relative z-10 mt-4">
@@ -547,9 +594,9 @@
         </div>
     </main>
 
-    <main id="view-admin" class="max-w-3xl mx-auto p-4 space-y-6 pt-6 hidden relative z-10">
+    <main id="view-admin" class="max-w-container p-4 space-y-6 pt-6 hidden relative z-10">
         <div class="flex items-center justify-between bg-white/80 backdrop-blur px-5 py-3 rounded-2xl border border-precious shadow-sm">
-            <h2 class="text-2xl font-bold text-arcavia flex items-center gap-2">
+            <h2 class="text-xl sm:text-2xl font-bold text-arcavia flex items-center gap-2">
                 <i class="fa-solid fa-lock text-precious"></i> หลังบ้าน ยัยชบา
             </h2>
             <button onclick="adminLogout(this)" class="text-sm text-strawberry font-bold bg-blush px-3 py-1.5 rounded-lg border border-precious hover:bg-white transition-colors">
@@ -566,7 +613,6 @@
             </h3>
             <div class="grid grid-cols-1 gap-4 items-center relative z-10">
                 
-                <!-- ตั้งค่าคำโปรยร้าน -->
                 <div class="bg-white/80 p-4 rounded-2xl border-2 border-blush">
                     <label class="block font-bold text-sm text-arcavia mb-2">คำโปรยหน้าร้าน (Tagline)</label>
                     <div class="flex gap-2">
@@ -723,7 +769,6 @@
     </main>
 
     <script>
-        // Supabase Initialization
         const SUPABASE_URL = 'https://gsghucmvcqucpvxvlgdh.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzZ2h1Y212Y3F1Y3B2eHZsZ2RoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5NjM3NjUsImV4cCI6MjEwNzUzOTc2NX0.4fKE_j2xZRUA6zNKNz0xsCwHN_60HQII9beMRAPju-o';
         
@@ -737,7 +782,7 @@
             queues: [],
             plusOneCount: 0,
             reviews: [],
-            compressedImgBase64: null, // For sending review, still Base64 to save quickly via DB if small, or Storage if you upgraded it. 
+            compressedImgBase64: null,
             welcomeAdminImgUrl: null,
             queueAdminImgUrl: null,
             creditAdminImgUrl: null
@@ -764,7 +809,6 @@
 
         async function fetchDataFromSupabase() {
             try {
-                // Fetch settings
                 const { data: settings, error: setErr } = await supaClient.from('shop_settings').select('*').eq('id', 1).single();
                 if (settings) {
                     state.shopTagline = settings.shop_tagline || 'ยินดีต้อนรับเบ้บทุกคนนะค้าา';
@@ -776,11 +820,9 @@
                     state.creditAdminImgUrl = settings.credit_img;
                 }
 
-                // Fetch queues
                 const { data: queuesData, error: qErr } = await supaClient.from('queues').select('*').order('created_at', { ascending: true });
                 if (queuesData) state.queues = queuesData;
 
-                // Fetch reviews (All for admin, approved for public)
                 let revQuery = supaClient.from('reviews').select('*').order('created_at', { ascending: false });
                 if(!state.isAdminLoggedIn) revQuery = revQuery.eq('status', 'approved');
                 
